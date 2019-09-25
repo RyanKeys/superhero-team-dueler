@@ -7,11 +7,24 @@ class Ability:
         name: str
         max_damage: int'''
         self.name = name
-        self.max_dmg = attack_power
+        self.attack_power = attack_power
 
     def attack(self):
         ''' Return a value between 0 and the value set by self.max_damage.'''
-        return random.randint(0, self.max_dmg)
+        return random.randint(0, self.attack_power)
+
+
+class Weapon(Ability):
+    def __init__(self, name, attack_power):
+        super().__init__(name, attack_power)
+
+    def attack(self):
+        """  This method returns a random value
+        between one half to the full attack power of the weapon.
+        """
+        # TODO: Use what you learned to complete this method.
+        dmg = random.randint(0, self.attack_power)
+        return dmg // 2
 
 
 class Armor:
@@ -88,7 +101,6 @@ class Hero:
                 print(f"{self.name} has {self.current_health} health left.")
 
             else:
-                print(f"{self} lost")
                 break
 
             if opponent.is_alive():
@@ -100,13 +112,26 @@ class Hero:
                 break
 
 
+class Team(Hero):
+    def __init__(self, name, heroes):
+        super.__init__(name)
+        self.heroes = heroes
+
+    def remove_hero(self, name):
+        '''Remove hero from heroes list.
+        If Hero isn't found return 0.
+        '''
+        # TODO: Implement this method to remove the hero from the list given their name.
+        pass
+
+
 if __name__ == "__main__":
-    hero1 = Hero("Wonder Woman")
-    hero2 = Hero("Dumbledore")
+    hero1 = Hero("Wonder Woman", 500)
+    hero2 = Hero("Dumbledore", 500)
     ability1 = Ability("Super Speed", 300)
     ability2 = Ability("Super Eyes", 130)
-    ability3 = Ability("Wizard Wand", 80)
-    ability4 = Ability("Wizard Beard", 20)
+    ability3 = Ability("Wizard Wand", 200)
+    ability4 = Ability("Wizard Beard", 350)
     hero1.add_ability(ability1)
     hero1.add_ability(ability2)
     hero2.add_ability(ability3)
